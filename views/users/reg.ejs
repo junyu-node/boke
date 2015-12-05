@@ -1,0 +1,20 @@
+<% include ../include/head%>
+
+<form method="post" action="/users/reg">
+    <div class="form-group">
+        <label for="username">用户名</label>
+        <input type="text" name="username" class="form-control" id="username" placeholder="请输入用户名">
+    </div>
+    <div class="form-group">
+        <label for="password">密码</label>
+        <input type="password" name="password" class="form-control" id="password" placeholder="请输入密码">
+
+    </div>
+    <div class="form-group">
+        <label for="password2">重复密码</label>
+        <input type="password" name="password2" class="form-control" id="password2" placeholder="请重新输入密码密码与上一次一致">
+
+    </div>
+    <button type="button" class="btn btn-default submit-btn">注册</button>
+</form>
+<% include ../include/foot%>
