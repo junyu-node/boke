@@ -4,7 +4,7 @@
 
 var mongoose=require('mongoose');
 
-var db=mongoose.connect('mongodb://123.57.143.189/201508blog');
+var db=mongoose.connect('mongodb://127.0.0.1/blogs');
 mongoose.model('User',new mongoose.Schema({
     username:String,
     password:String

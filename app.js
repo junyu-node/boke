@@ -4,7 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var session=require('express-session')
+var MongoStore = require('connect-mongo')(session);
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var articles = require('./routes/articles');
@@ -25,6 +26,17 @@ require('./db');
 app.use('/', routes);
 app.use('/users', users);
 app.use('/articles', articles);
+
+app.use(session({
+  secret:'junyu',
+  rasave:false,
+  saveUninitialized: true,
+  store:new MongoStore({url:'mongodb://127.0.0.1/blogs'}),
+  cookie:{
+    maxAge:30*60*1000
+  }
+
+}))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

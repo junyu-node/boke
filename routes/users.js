@@ -12,21 +12,27 @@ router.get('/reg', function(req, res, next) {
 ;router.post('/reg', function(req, res, next) {
 
   var user=req.body;
-  console.log(user)
-  if(user.password==user.password2){
-    new Model('User')(user).save(function(err,user){
-      //res.end(JSON.stringify({status:1, msg:'注册成功'}));
-      if(err){
-        //res.redirect('/users/reg');
-        res.end(JSON.stringify({status:0, msg:'出现错误'}));
+  Model('User').findOne({username:user.username},function(err,doc){
+    if(!doc){
+      if(user.password==user.password2){
+        new Model('User')(user).save(function(err,user){
+          //res.end(JSON.stringify({status:1, msg:'注册成功'}));
+          if(err){
+            //res.redirect('/users/reg');
+            res.end(JSON.stringify({status:0, msg:'出现错误'}));
+          }else{
+            //res.redirect('/users/login')
+            res.end(JSON.stringify({status:1, msg:'/users/login'}));
+          }
+        })
       }else{
-        //res.redirect('/users/login')
-        res.end(JSON.stringify({status:1, msg:'/users/login'}));
+        res.end(JSON.stringify({status:0, msg:'两次输入的密码不一致'}));
       }
-    })
-  }else{
-    res.end(JSON.stringify({status:0, msg:'两次输入的密码不一致'}));
-  }
+    }else{
+      res.end(JSON.stringify({status:0, msg:'用户名已经存在'}));
+    }
+  })
+
 
  // res.send('注册');
 });
