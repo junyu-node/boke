@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
@@ -41,11 +42,13 @@ router.get('/login', function(req, res, next) {
 });
 router.post('/login', function(req, res, next) {
   var user=req.body;
-  new Model('User').find(user,function(err,doc){
+  Model('User').findOne(user,function(err,user){
 
     if(!err){
-
-      if(doc.length){
+     // console.log(doc)
+      if(user){
+        //console.log(res.session)
+       req.session.login=user;
         res.end(JSON.stringify({status:1, msg:'/'}));
       }else{
         res.end(JSON.stringify({status:0, msg:'用户名或密码错误'}));
@@ -57,8 +60,10 @@ router.post('/login', function(req, res, next) {
 
 });
 
-router.get('/loginout', function(req, res, next) {
-  res.send('respond with a resource');
+router.get('/logout', function(req, res, next) {
+  console.log('=========================')
+  req.session.login=null;
+  res.redirect('/users/login');
 });
 
 
