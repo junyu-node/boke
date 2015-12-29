@@ -61,7 +61,6 @@ router.post('/login', function(req, res, next) {
 });
 
 router.get('/logout', function(req, res, next) {
-  console.log('=========================')
   req.session.login=null;
   res.redirect('/users/login');
 });
