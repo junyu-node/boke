@@ -10,6 +10,7 @@ var flash=require('connect-flash');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var articles = require('./routes/articles');
+var multer=require('multer')
 var app = express();
 
 // view engine setup

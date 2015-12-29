@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
   Model('Article').find({}).populate('user').exec(function(err,articles){
-
+    console.log(articles)
     res.render('index', { articles: articles });
 
   })
