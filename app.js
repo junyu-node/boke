@@ -37,7 +37,10 @@ app.use(session({
 }));
 app.use(flash());
 app.use(function(req,res,next){
+  res.locals.keyworld='';
+  res.locals.indexActive='';
   res.locals.login=req.session.login;
+  console.log(res.locals.login)
   next();
 });
 app.use('/', routes);
@@ -54,7 +57,8 @@ app.use('/articles', articles);
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
-  next(err);
+  //next(err);
+  res.render("404")
 });
 
 // error handlers
@@ -75,6 +79,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
+
   res.render('error', {
     message: err.message,
     error: {}

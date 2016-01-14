@@ -1,5 +1,7 @@
 <% include include/head%>
+
 <%
+    if(articles)
  for(var i=0;i<articles.length;i++){
     var article=articles[i];
      %>
@@ -13,7 +15,7 @@
                      %>http://p2.gexing.com/G1/M00/DA/44/rBACE1Or-q6DO1B3AAAhdSV6v7o914_200x200_3.jpg?recache=20131108<%
                  }
                   %>">
-                <%=article.user.username%>
+                <%=article.user%>
             </a>
         </div>
         <div class="media-body">
@@ -25,7 +27,43 @@
 
     </div>
 <%
+
  }
-%>
+%><nav>
+    <ul class="pagination">
+        <% if(totalpage>1){
+
+            if(pageNum>1){
+        %>
+        <li>
+            <a href="/articles/list/<%=pageNum-1%>/<%=pageSize%>?keyworld=<%=keyworld%>" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+
+        <% }
+         for(var i=0;i<totalpage;i++){
+            if(i+1==pageNum){
+                %>
+                    <li><a href="javascript:;" style="z-index: 2;color: #23527c;background-color: #eee;border-color: #ddd;"><%=pageNum%></a></li>
+
+        <%
+            }else{
+             %>
+             <li><a href="/articles/list/<%=i+1%>/<%=pageSize%>?keyworld=<%=keyworld%>"><%=i+1%></a></li>
+        <%}
+         }
+            if(pageNum<totalpage){
+          %>
+        <li>
+            <a href="/articles/list/<%=pageNum+1%>/<%=pageSize%>?keyworld=<%=keyworld%>" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+        <%
+        }}
+        %>
+    </ul>
+</nav>
 
 <% include include/foot%>

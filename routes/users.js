@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 router.get('/reg', function(req, res, next) {
-  res.render('users/reg',{});
+  res.render('users/reg',{indexActive:'reg'});
 
 })
 ;router.post('/reg', function(req, res, next) {
@@ -20,6 +20,7 @@ router.get('/reg', function(req, res, next) {
           //res.end(JSON.stringify({status:1, msg:'注册成功'}));
           if(err){
             //res.redirect('/users/reg');
+
             res.end(JSON.stringify({status:0, msg:'出现错误'}));
           }else{
             //res.redirect('/users/login')
@@ -38,7 +39,7 @@ router.get('/reg', function(req, res, next) {
  // res.send('注册');
 });
 router.get('/login', function(req, res, next) {
-  res.render('users/login',{});
+  res.render('users/login',{indexActive:'log'});
 });
 router.post('/login', function(req, res, next) {
   var user=req.body;
@@ -48,7 +49,9 @@ router.post('/login', function(req, res, next) {
      // console.log(doc)
       if(user){
         //console.log(res.session)
+        console.log(user)
        req.session.login=user;
+
         res.end(JSON.stringify({status:1, msg:'/'}));
       }else{
         res.end(JSON.stringify({status:0, msg:'用户名或密码错误'}));
