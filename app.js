@@ -40,7 +40,10 @@ app.use(function(req,res,next){
   res.locals.keyworld='';
   res.locals.indexActive='';
   res.locals.login=req.session.login;
-  console.log(res.locals.login)
+  res.locals.success=req.flash('success').toString();
+  res.locals.error=req.flash('error').toString();
+  res.locals.warning=req.flash('warning').toString();
+
   next();
 });
 app.use('/', routes);

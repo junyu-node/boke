@@ -47,3 +47,13 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+<% if(success){
+    %><div class="alert alert-success" role="alert"><%=success%></div><%
+}%>
+<% if(error){
+%><div class="alert alert-danger" role="alert"><%=error%></div><%
+}%>
+<% if(warning){
+%><div class="alert alert-warning"  res.locals.success=req.flash('success').toString();
+" role="alert"><%=warning%></div><%
+}%>

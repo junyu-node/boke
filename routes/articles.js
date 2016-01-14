@@ -79,11 +79,21 @@ router.get('/delete/:id',function(req,res){
 });
 router.get('/edit/:id',function(req,res){
   var id=req.params.id;
-  Model('Article').findById(id,function(err,article){
+  if(req.session.login){
+  Model('Article').findById(id).populate('user').exec(function(err,article){
 
-    res.render('articles/add',{article:article})
+    if(req.session.login.username==article.user.username){
+      res.render('articles/add',{article:article})
+    }else{
+      req.flash('warning','您不能编辑别人的文章');
+      res.redirect('back')
+    }
+
   })
-
+  }else{
+    req.flash('warning','编辑文章请先登录');
+    res.redirect('/users/login');
+  }
 
 
 });
@@ -99,8 +109,8 @@ router.get('/list/:pageNum/:pageSize',function(req,res){
 
     pageNum=pageNum>=totalPage?totalPage:pageNum;
     Model('Article').find({$or:[{title:reg},{content:reg}]})
-        .skip((pageNum-1)*pageSize).limit(pageSize).exec(function(err,articles){
-        //console.log(articles);
+        .skip((pageNum-1)*pageSize).limit(pageSize).populate('user').exec(function(err,articles){
+
         res.render('index',{
           title:'主页',
           pageNum:pageNum,
