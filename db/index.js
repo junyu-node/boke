@@ -17,6 +17,11 @@ mongoose.model('Article',new mongoose.Schema({
     user:{type:ObjectId,ref:'User'}//对象Id类型,引用user
 
 
+}));
+
+mongoose.model('Img',new mongoose.Schema({
+    name:String,
+    src:String
 }))
 
 
