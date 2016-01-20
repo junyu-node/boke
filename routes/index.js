@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/', function(req, res, next) {
 
-    res.redirect('/articles/list/1/2');
+    res.redirect('/articles/list/1/10');
 
 });
 

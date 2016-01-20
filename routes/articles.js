@@ -81,15 +81,18 @@ router.get('/detail/:id',function(req,res){
 router.get('/delete/:id',function(req,res){
   var id=req.params.id;
   if(req.session.login) {
-    if(req.session.login.username==article.user.username){
-      Model('Article').remove({_id: id}, function (err) {
+    Model('Article').findById(id).populate('user').exec(function(err,article){
+      if(req.session.login.username==article.user.username){
+        Model('Article').remove({_id: id}, function (err) {
 
           res.redirect(req.session.url);
-      })
-    }else{
-      req.flash('warning','您不能编辑别人的文章');
-      res.redirect('back')
-    }
+        })
+      }else{
+        req.flash('warning','您不能编辑别人的文章');
+        res.redirect('back')
+      }
+    })
+
 
   }else{
     req.flash('warning','删除文章必须先登录');
