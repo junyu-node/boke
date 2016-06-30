@@ -1,10 +1,16 @@
 /**
  * Created by Administrator on 2015/12/5.
  */
-
+//mongo ds019658.mlab.com:19658/blogs -u junyu -p aini1314
 var mongoose=require('mongoose');
 var ObjectId=mongoose.Schema.Types.ObjectId;
-var db=mongoose.connect('mongodb://127.0.0.1/blogs');
+//mongodb://127.0.0.1/blogs
+var mongodbUri ='mongodb://junyu:aini1314@ds019658.mlab.com:19658/blogs';
+mongoose.connect(mongodbUri);
+var db=mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+//var db=mongoose.connect('mongodb://127.0.0.1/blogs');
 mongoose.model('User',new mongoose.Schema({
     username:String,
     password:String
