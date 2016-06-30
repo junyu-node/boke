@@ -29,7 +29,7 @@ app.use(session({
   secret:'junyu',
   rasave:false,
   saveUninitialized: true,
-  store: new MongoStore({ url: 'mongodb://127.0.0.1/blogs' }),
+  store: new MongoStore({ url: 'mongodb://junyu:aini1314@ds019658.mlab.com:19658/blogs' }),
   cookie:{
     maxAge:30*60*1000
   }

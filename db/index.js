@@ -5,11 +5,9 @@
 var mongoose=require('mongoose');
 var ObjectId=mongoose.Schema.Types.ObjectId;
 //mongodb://127.0.0.1/blogs
-var mongodbUri ='mongodb://junyu:aini1314@ds019658.mlab.com:19658/blogs';
-mongoose.connect(mongodbUri);
-var db=mongoose.connection;
 
-db.on('error', console.error.bind(console, 'connection error:'));
+var db=mongoose.connect('mongodb://junyu:aini1314@ds019658.mlab.com:19658/blogs');
+
 //var db=mongoose.connect('mongodb://127.0.0.1/blogs');
 mongoose.model('User',new mongoose.Schema({
     username:String,
