@@ -19,9 +19,7 @@
     "mongoose": "^4.5.2",
     "morgan": "~1.6.1",
     "multer": "^1.1.0",
-    "serve-favicon": "~2.3.0"
-  },
-  "devDependencies": {
+    "serve-favicon": "~2.3.0",
     "connect-flash": "^0.1.1",
     "connect-mongo": "^0.8.2",
     "express-session": "^1.12.1",
